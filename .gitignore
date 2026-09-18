@@ -1,0 +1,15 @@
+# OS / editor
+.DS_Store
+.vscode/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Instructor's material: already in the class repository
+Slides/
+FinTech 545 - Quantitative Risk Management.pdf
+
+# Local working copy of Assignment 1; the submitted version is /Assignment1
+Assignments/W1/
