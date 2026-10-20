@@ -1,0 +1,119 @@
+1. Prompt: can you help me complete the Higham's method? for Question 1's D. I already built the scaffold and the setup.
+
+Answer: Part D is filled in. Higham is applied to the pairwise Pearson correlation, which is what this exam asks for.
+
+Practice 1_2 first built a pairwise covariance $S$, then ran Higham on $R=D^{-1}SD^{-1}$. That $R$ is not the same as p1.corr() when data are missing: the diagonal of $S$ uses each series’ full sample, while each off-diagonal uses only the overlapping rows. Question 1 wants the correlations computed pairwise, then Higham on that matrix.
+
+The new cell does this:
+
+Build $R$ with p1.corr() (pairwise-complete Pearson).
+Call higham_nearest_correlation (already in your setup: PSD projection + unit diagonal + Dykstra).
+Print $R^*$, the eigenvalues, and the entrywise changes.
+Results to report
+
+Original $R$
+indefinite; smallest eigenvalue $\approx -0.0893$
+Higham $R^*$
+PSD; eigenvalues $\approx 0$, $0.450$, $0.703$, $0.807$, $3.040$
+Largest change
+$(x_2,x_5)$: $0.7875 \to 0.7393$ (change $0.0482$)
+All four $x_5$ correlations are pulled down; the other pairs move up a little. The diagonal stays 1.
+
+Run the new cell after the setup and data cells.
+
+2. Prompt: and help me finish question 1, make all the parts more organized, break down the setup cell. make each subquestion has its own code belonging to it. 
+Question 1 is finished and reorganized. The old shared setup cell is gone. The notebook now only has a 3-line import cell; each part has its own code and a short write-up.
+
+(a) Pairwise Pearson correlation (p1.corr()), plus overlap counts so it is clear why each pair uses a different 
+n
+i
+j
+n 
+ij
+​
+ .
+
+(b) Full-sample variances (every non-missing observation of that series):
+
+n
+n	variance
+x1
+41
+0.000406074
+x2
+41
+0.000480066
+x3
+36
+0.000151110
+x4
+41
+0.000841739
+x5
+42
+0.000273150
+(c) Tests the correlation from (a), not the covariance. Smallest eigenvalue 
+≈
+−
+0.0893
+≈−0.0893.
+
+(d) Higham lives only here (PSD projection + unit diagonal + Dykstra). 
+R
+∗
+R 
+∗
+  is PSD. Largest move is 
+(
+x
+2
+,
+x
+5
+)
+(x 
+2
+​
+ ,x 
+5
+​
+ ): 
+0.7875
+→
+0.7393
+0.7875→0.7393.
+
+(e) 
+Σ
+∗
+=
+D
+R
+∗
+D
+Σ 
+∗
+ =DR 
+∗
+ D using the (b) standard deviations. The diagonal matches (b); 
+Σ
+∗
+Σ 
+∗
+.
+
+The cells already have output from a full run. 
+
+
+3. Prompt: refer to my note and do a copula setup. (for 3(b))
+Yes. I used that notebook for the portfolio setup, and the class slides and Julia files for the distributions and the copula test.
+Arithmetic returns, $P_t/P_{t-1}-1$.
+Current dollar exposure $h_i P_{i,T}$ at the last price, with the shares and books from problem3_holdings.csv.
+One P&L per draw, then stock, Book A, Book B, and the total on the same draws.
+VaR and ES reported as positive dollar losses.
+The notebook matches the class methods and the exam sheet. I restated each question in front of its answer and labeled every code cell # Problem 1(a) through # Problem 3(c).
+
+Conventions. Arithmetic returns are used throughout. problem1.csv is already returns, so it is not differenced again. VaR and ES are positive losses: percent of the position in Question 2, dollars in Question 3. Nothing was committed.
+
+4. Prompt:  this cell doesnt seem to be displayed properly (debugging code)
+The Higham results in Problem 1(d) were coming out as HTML tables tucked between print lines, and the eigenvalues wrapped onto a second line in scientific notation. That cell now prints three plain-text tables instead.
